@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS hr_data (
+	time TIME NOT NULL,
+    value INT NOT NULL
+);
