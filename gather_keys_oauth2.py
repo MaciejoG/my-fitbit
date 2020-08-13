@@ -5,7 +5,6 @@ import sys
 import threading
 import traceback
 import webbrowser
-
 from urllib.parse import urlparse
 from base64 import b64encode
 from fitbit.api import Fitbit
