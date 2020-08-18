@@ -155,18 +155,18 @@ try:
     cur.execute('''SELECT date FROM hr ORDER BY date DESC LIMIT 1;''')
     fetched_data = cur.fetchall() 
     last_entry_date = fetched_data[0][0]
-    print("Last entry date: " + str(last_entry_date))
     today = date.today()
-    print("Today's date:", today)
-    dates_difference_days = (today-last_entry_date).days + 1
     # Some data will output error if attempted to fetch before "today" is over, fetch only data until yesterday
     base_date = today - timedelta(days=1)
     # Need to add "1" as we don't want to fetch the same day again (fitbit fetches inclusive base_date and end_date)
     end_date = last_entry_date + timedelta(days=1)
-    if ((base_date-end_date).days > 1):
+    print("Last entry date: " + str(last_entry_date))
+    print("Today's date:", today)
+    print("Attempt to update from " + str(end_date) + " (inclusive) to " + str(base_date) + " (inclusive)")
+    if (base_date >= end_date):
         # Create dates range list
         dates_list = daterange(base_date, end_date)
-        print("Will update data for days:")
+        print("Will update data for " + str(len(dates_list)) + " day(s):")
         print(dates_list)
     else:
         print("Too early for an update")
@@ -381,13 +381,15 @@ def getFoodData(authd_client,base_date,end_date):
 
 
 print("Current time: " + str(datetime.now()))
-if ((base_date-end_date).days > 1):
+if (base_date >= end_date):
     print("Getting fitbit and mfp data")
     getActivityData(authd_client,base_date,end_date)
     getFatData(authd_client,base_date,end_date)
     getSleepData(authd_client,base_date,end_date)
     getHrData(authd_client,base_date,end_date)
     getFoodData(authd_client,base_date,end_date)
+    print("Data inserted successfully")
 else:
     print("No data to update")
 print("--------------------------------------")
+# %%
