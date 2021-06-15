@@ -1,3 +1,4 @@
 {
-    "python.dataScience.jupyterServerURI": "http://46.101.121.37:8888/?token=a732db073a783998d89a3e82715256b47757c9b4af2ae4a5"
+    "python.dataScience.jupyterServerURI": "local",
+    "python.pythonPath": "/Users/maciejgumulka/Documents/my-fitbit/venv/bin/python3"
 }
